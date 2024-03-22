@@ -1,1 +1,1 @@
-
+I am a PhD Candidate at UT Austin advised by Dr Vagheesh Narasimhan. Before joing UT Austin I completed my B.Tech and M.Tech degree at Indian Institute of Technology Kharagpur in Biotechnology and Biochemical Engineering.
