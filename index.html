@@ -123,24 +123,32 @@
                 </div>
                 <div class="project-date">Jan 2026 - Present</div>
                 <ul class="project-desc">
-                    <li>Built a reproducible target-discovery pipeline in the UK Biobank integrating GWAS, LDSC genetic
-                        correlation, Mendelian randomization, colocalization, and fine-mapping across seven lipid traits
-                        and CAD/MACE outcomes.</li>
-                    <li>Combining common- and rare-variant evidence with eQTL/pQTL colocalization to separate causal
-                        loci from confounding, benchmarking on established lipid targets (LDLR, PCSK9, APOB, LPA) while
-                        prioritizing new candidate effector genes.</li>
+                    <li>Built a reproducible target-discovery pipeline across 402,200 UK Biobank participants (exomes to
+                        360,410), integrating GWAS, LD-score genetic correlation, multivariable Mendelian randomization,
+                        colocalization, and SuSiE fine-mapping over seven lipid traits and CAD/MACE outcomes.</li>
+                    <li>Established LDL-C as the dominant causal lipid axis (multivariable MR OR 1.30 per SD, 95% CI
+                        1.21&ndash;1.40 for CAD) and resolved 37 colocalized exposure&times;outcome loci (PP.H4 &gt;
+                        0.8), including <em>PCSK9</em>, <em>LDLR</em>, <em>SORT1</em>, <em>APOE</em>, and
+                        <em>TRIB1</em>.</li>
+                    <li>Converged common-variant signals with 341 exome-wide rare-variant burden associations to
+                        prioritize candidate effector genes and therapeutic targets.</li>
                 </ul>
             </div>
 
             <div class="project">
-                <div class="project-title">Imaging-Genetics GWAS of Cardiac Structure and Function</div>
+                <div class="project-title">Imaging-Genetics of Cardiac Structure and Coronary Artery Disease</div>
                 <div class="project-date">2026 - Present</div>
                 <ul class="project-desc">
-                    <li>Learning self-supervised representations of cardiac cine-MRI from ~58,000 UK Biobank
-                        participants and running GWAS on the learned imaging phenotypes to map genetic loci for cardiac
-                        structure and motion.</li>
-                    <li>Using bidirectional Mendelian randomization between imaging endophenotypes and CAD to
-                        distinguish causal cardiac remodeling from secondary disease effects.</li>
+                    <li>Trained a video masked-autoencoder on 69,932 UK Biobank cardiac cine-MRI studies and ran
+                        genome-wide association analysis on the learned representation; 18 of 20 latent axes were
+                        significantly heritable with well-calibrated statistics.</li>
+                    <li>Showed that heritability and standard GWAS diagnostics do not establish that a learned
+                        phenotype measures the intended anatomy &mdash; the leading axis tracked body-mass index
+                        (r<sub>g</sub> = &minus;0.74, top locus <em>FTO</em>), and imaging centre was more decodable
+                        from the embedding than ejection fraction.</li>
+                    <li>Corrected this field-of-view confounding by restricting the view to the heart and residualizing
+                        the representation before dimensionality reduction, recovering reproducible cardiac-associated
+                        loci that add signal beyond 36 expert CMR measurements.</li>
                 </ul>
             </div>
 
