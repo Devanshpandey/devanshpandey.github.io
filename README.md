@@ -10,7 +10,7 @@ Personal academic website of Devansh Pandey — live at **https://devanshpandey.
 │                        #   Research Experience, Publications, Service & Teaching
 └── assets/
     ├── css/style.css    # all styling
-    └── img/profile.png  # profile photo
+    └── img/profile.jpg  # profile photo
 ```
 
 ## Editing
