@@ -1500,7 +1500,7 @@ FIGS.cad_lpa=function(host){const g=panels(host,'two');
   P.text(5,92,'few repeats: small protein,',{dx:8,cls:'sm'});P.text(5,84,'secreted well, high Lp(a)',{dx:8,cls:'sm'});
   P=Plot(g,{w:340,h:300,ml:54,x:[0,150],y:[1,2.6],title:'Level and lifelong risk',xlab:'Lp(a) (mg/dL)',ylab:'relative coronary risk',xt:[0,50,100,150],yt:[1,1.5,2,2.5]});
   P.line(range(0,150,60).map(x=>[x,Math.pow(0.942,-x/10)]),'s2',{tip:p=>'Lp(a) '+p[0].toFixed(0)+' mg/dL: relative risk '+p[1].toFixed(2)});
-  P.vline(50);P.text(50,2.5,'about 1 in 5 people are above 50 mg/dL',{dx:6,cls:'sm'})};
+  P.vline(50);P.text(50,2.5,'1 in 5 people are above 50 mg/dL',{dx:6,cls:'sm'})};
 
 /* Chapter 10: clonal haematopoiesis by age */
 FIGS.cad_chip=function(host){const d=[['under 40',0,'rare'],['70–79',9.5,'9.5%'],['80–89',11.7,'11.7%'],['90 and over',18.4,'18.4%']];

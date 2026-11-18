@@ -1950,7 +1950,7 @@ svg text.c{text-anchor:middle} svg text.big{font-size:13.5px;fill:var(--ink)}
 <path d="M192,43 L247,43" class="arrow"/><path d="M422,43 L477,43" class="arrow"/><path d="M560,68 L560,147" class="arrow"/>
 <path d="M105,68 L105,147" class="arrow"/><path d="M192,173 L477,173" class="arrow"/>
 <text x="335" y="165" class="c">direct genetic effect</text><text x="114" y="112">Mendelian segregation (random)</text>
-<text x="570" y="112">indirect genetic effect</text>
+<text x="550" y="112" text-anchor="end">indirect genetic effect</text>
 </svg></div><figcaption><b><span class="fnum"></span>Direct and indirect genetic effects.</b> A child's genotype is correlated with the trait through two routes: its own biological effect (bottom), and the parents' genotypes shaping the environment the child grows up in (top). A population GWAS measures the sum. Alleles the parents did <em>not</em> transmit can act only through the top route, which is how the two are separated.</figcaption></figure>
 
 <h2>The randomness within families</h2>
@@ -2176,7 +2176,7 @@ svg text.c{text-anchor:middle} svg text.big{font-size:13.5px;fill:var(--ink)}
 <h2>Confounding by linkage disequilibrium</h2>
 <p>Suppose the variant that changes the protein and a variant that changes disease risk are different, but lie near each other and are partly correlated. The disease variant might act through a neighbouring gene. The lead pQTL variant will then show an association with disease through LD alone, and its Wald ratio will suggest a causal effect of the protein that does not exist. This is the most common way for cis-MR to mislead, and gene-dense regions are especially prone to it.</p>
 
-<figure id="f-cis" data-fig="cisld" data-take="One shared variant puts every variant on a line; two linked variants do not"><figcaption><b><span class="fnum"></span>Variant effects on a protein and on a disease, for every variant in a gene region</b> (simulated). Each point is a variant, shaded by its LD with the lead pQTL variant. Left: one causal variant affects both, so every variant's two effects are in the same proportion and the points lie on one line. Right: the protein and the disease are driven by two different variants in moderate LD. The lead pQTL variant still has an effect on disease, so a Wald ratio from it alone looks convincing, but the points no longer follow a single line.</figcaption></figure>
+<figure id="f-cis" data-fig="cisld" data-take="One shared variant puts every variant on a line; two linked variants do not"><figcaption><b><span class="fnum"></span>Variant effects on a protein and on a disease, for every variant in a gene region</b> (simulated). Each point is a variant, shaded by its LD with the lead pQTL variant (the larger point). The dashed line is the ratio that the lead variant alone would give. Left: one causal variant affects both, so every variant's two effects are in the same proportion and the points lie on the line. Right: the disease is caused by a different variant (ringed) with \(r^2 = 0.25\) to the lead pQTL variant. The lead variant still has an effect on disease, so a Wald ratio from it alone looks convincing, but variants closer to the disease variant lie well above the line.</figcaption></figure>
 
 <p>The figure shows the two defences. The first is <strong>colocalization</strong> (Chapter 18; compare <span class="fref" data-ref="f18-2"></span>): test whether the protein signal and the disease signal share a causal variant. A cis-MR result is credible only with good evidence for a shared variant, and a high posterior probability of distinct variants is a reason to discard it. The second is <strong>heterogeneity</strong>: if several variants in the region change the protein by different amounts, they should all give the same ratio. Where a gene has more than one independent pQTL signal, each is an independent test, a small allelic series inside the MR.</p>
 <p>A further check is to look at the neighbours. If the instruments are also eQTLs for adjacent genes in a relevant tissue, the MR cannot by itself say which gene is responsible.</p>
@@ -2869,7 +2869,7 @@ FIGS.polynormal=function(host){const g=panels(host);
       xt:L===1?[0,1,2]:L===4?[0,2,4,6,8]:[25,40,55]});
     for(let k=lo;k<=hi;k++)P.bar(k-0.5,k+0.5,pm[k],'f1',k+' alleles: '+(100*pm[k]).toFixed(1)+'%')})};
 FIGS.avgeffect=function(host){const a=1,d=0.8,p=0.4,q=1-p,Gv=[0,a+d,2*a],fr=[q*q,2*p*q,p*p],M=fr[1]*Gv[1]+fr[2]*Gv[2],al=a+d*(q-p),bv=x=>M+al*(x-2*p);
-  const P=Plot(host,{x:[-0.4,2.4],y:[-0.3,2.6],h:340,xt:[0,1,2],xf:v=>['aa (0 copies)','Aa (1 copy)','AA (2 copies)'][v],xlab:'genotype (number of A alleles)',ylab:'trait value',legend:[['1','genotypic value G'],['2','breeding value A (regression line)']]});
+  const P=Plot(host,{x:[-0.4,2.4],y:[-0.3,3.1],h:340,xt:[0,1,2],xf:v=>['aa (0 copies)','Aa (1 copy)','AA (2 copies)'][v],xlab:'genotype (number of A alleles)',ylab:'trait value',legend:[['1','genotypic value G'],['2','breeding value A (regression line)']]});
   P.line([[-0.3,bv(-0.3)],[2.3,bv(2.3)]],'s2',{nohover:true});
   [0,1,2].forEach(x=>{P.seg(x,bv(x),x,Gv[x],'s4 dash thin');P.dots([[x,bv(x)]],'f2 ring',4,{tip:()=>'breeding value '+bv(x).toFixed(2)});
     P.dots([[x,Gv[x]]],'f1 ring',5+14*fr[x],{tip:()=>'genotypic value '+Gv[x].toFixed(2)+', frequency '+fr[x].toFixed(2)})});
@@ -2877,8 +2877,8 @@ FIGS.avgeffect=function(host){const a=1,d=0.8,p=0.4,q=1-p,Gv=[0,a+d,2*a],fr=[q*q
 
 /* ---------- Chapter 13 ---------- */
 FIGS.po=function(host){const R=mkRng(4),h2=0.6,pts=[];for(let i=0;i<400;i++){const m=R.n()/Math.SQRT2;pts.push([m,h2*m+Math.sqrt(1-h2*h2/2)*R.n()])}
-  const P=Plot(host,{x:[-2.2,2.2],y:[-3.2,3.2],h:340,xlab:'average of the two parents (SD units)',ylab:'offspring (SD units)',legend:[['4','one family'],['2','regression slope = h² = 0.6']]});
-  P.dots(pts,'f4',2.6,{op:0.7,nohover:true});P.line([[-2.2,-2.2*h2],[2.2,2.2*h2]],'s2',{nohover:true});P.line([[-2.2,-2.2],[2.2,2.2]],'sk thin dash',{nohover:true});P.text(2.2,2.2,'slope 1',{anchor:'end',dx:-4,dy:-6,cls:'sm'})};
+  const P=Plot(host,{x:[-2.6,2.6],y:[-3.2,3.2],h:340,xlab:'average of the two parents (SD units)',ylab:'offspring (SD units)',legend:[['4','one family'],['2','regression slope = h² = 0.6']]});
+  P.dots(pts,'f4',2.6,{op:0.7,nohover:true});P.line([[-2.6,-2.6*h2],[2.6,2.6*h2]],'s2',{nohover:true});P.line([[-2.6,-2.6],[2.6,2.6]],'sk thin dash',{nohover:true});P.text(2.6,2.6,'slope 1',{anchor:'end',dx:-4,dy:-6,cls:'sm'})};
 FIGS.liability=function(host){const K=0.05,t=1.6449,h2=0.5,i=phi(t)/K,sh=0.5*h2*i,sd=Math.sqrt(1-0.25*h2*h2*i*(i-t)),risk=1-Phi((t-sh)/sd);
   const P=Plot(host,{x:[-3.5,4.5],y:[0,0.46],h:320,xlab:'liability (SD units)',ylab:'density',legend:[['1','general population'],['2','siblings of affected people']]});
   const xs=range(-3.5,4.5,200);P.area(range(t,4.5,60).map(x=>[x,phi(x)]),'f1',0.35);P.area(range(t,4.5,60).map(x=>[x,phi((x-sh)/sd)/sd]),'f2',0.22);
@@ -3023,7 +3023,7 @@ FIGS.twins=function(host){const g=panels(host,'two'),R=mkRng(27),h2=0.8,c2=0.1,e
 FIGS.winner=function(host){const zt=4.5,thr=5.451,a=thr-zt,mt=zt+phi(a)/(1-Phi(a)),P=Plot(host,{x:[1,8.5],y:[0,0.46],h:300,xlab:'estimated effect ÷ standard error (Z) in one study',ylab:'density across repeated studies',legend:[['4','all possible estimates of this variant'],['2','estimates that pass genome-wide significance']]});
   P.area(range(1,8.5,150).map(z=>[z,phi(z-zt)]),'f4',0.3);P.area(range(thr,8.5,80).map(z=>[z,phi(z-zt)]),'f2',0.75);P.line(range(1,8.5,150).map(z=>[z,phi(z-zt)]),'s4',{label:'estimate'});
   P.vline(zt,'sk dash');P.vline(mt,'s2');P.vline(thr,'s4 dash');P.text(zt,0.44,'true value 4.5',{anchor:'end',dx:-6,cls:'sm'});P.text(thr,0.3,'threshold',{dx:5,cls:'sm'});P.text(thr,0.26,'5 × 10⁻⁸',{dx:5,cls:'sm'});
-  P.text(mt,0.44,'average reported value '+mt.toFixed(1)+' ('+Math.round(100*(mt/zt-1))+'% too large)',{dx:6,cls:'sm'});P.text(thr,0.17,'reported '+Math.round(100*(1-Phi(a)))+'% of the time',{dx:60,cls:'sm'})};
+  P.text(mt,0.44,'average reported value '+mt.toFixed(1),{dx:6,cls:'sm'});P.text(mt,0.44,'('+Math.round(100*(mt/zt-1))+'% too large)',{dx:6,dy:14,cls:'sm'});P.text(thr,0.17,'reported '+Math.round(100*(1-Phi(a)))+'% of the time',{dx:60,cls:'sm'})};
 FIGS.strat=function(host){const R=mkRng(18),P=Plot(host,{x:[-0.6,2.6],y:[-3,4.2],h:330,xt:[0,1,2],xlab:'copies of the allele',ylab:'trait (SD units)',legend:[['1','population 1 (allele frequency 0.2, lower trait mean)'],['2','population 2 (allele frequency 0.7, higher trait mean)']],legendSq:true});
   let sx=0,sy=0,sxx=0,sxy=0,n=0;[[0.2,0,'f1','s1'],[0.7,1.2,'f2','s2']].forEach(([f,m,fc,sc])=>{const pts=[];let t=0;for(let i=0;i<170;i++){const gg=(R.u()<f?1:0)+(R.u()<f?1:0),y=m+0.9*R.n();t+=y;pts.push([gg+(R.u()-0.5)*0.5,y]);sx+=gg;sy+=y;sxx+=gg*gg;sxy+=gg*y;n++}
     P.dots(pts,fc,2.5,{op:0.65,nohover:true});P.line([[-0.4,t/170],[2.4,t/170]],sc,{nohover:true})});
@@ -3072,16 +3072,25 @@ FIGS.allelic=function(host){
   P.dots([[40,0.40]],'fb sk',5,{nohover:true})};
 
 FIGS.cisld=function(host){const g=panels(host,'two');
-  [['One shared causal variant',1],['Two distinct variants in LD',0]].forEach(([title,shared])=>{
-    const R=mkRng(shared?33:44),P=Plot(g,{w:340,h:310,ml:58,x:[0,0.42],y:[-0.02,0.14],title,xlab:'effect on the protein (SD)',ylab:'effect on disease (log odds)',xt:[0,0.1,0.2,0.3,0.4],yt:[0,0.05,0.1],
+  /* Variants sit along a region and LD falls off with distance: r = exp(-distance/L). Variant A changes the protein.
+     Left: A also changes disease risk. Right: a different variant B does, with r(A,B) = 0.5. Marginal effects are the
+     causal effect times the LD with the causal variant, so every point is bounded by construction. */
+  const bA=0.4,th=0.3,gB=0.12,L=0.2885,xA=0.3,xB=0.5,XM=0.45,YM=0.15;
+  [['One shared causal variant',1,33],['Two distinct variants in LD',0,44]].forEach(([title,shared,seed])=>{
+    const R=mkRng(seed),P=Plot(g,{w:340,h:310,ml:58,x:[0,XM],y:[-0.03,YM],title,xlab:'effect on the protein (SD)',ylab:'effect on disease (log odds)',xt:[0,0.1,0.2,0.3,0.4],yt:[0,0.05,0.1,0.15],
       legend:[['2','r² ≥ 0.8 with lead pQTL'],['1','0.4–0.8'],['4','< 0.4']],legendSq:true});
-    P.hline(0);const th=0.3;
-    for(let i=0;i<26;i++){const r=i===0?1:Math.max(0.05,R.u());const bx=0.05+0.33*r*(0.75+0.5*R.u());
-      const by=shared?th*bx+0.004*R.n():th*(0.15+0.9*R.u())*(0.08+0.3*R.u())/0.3+0.004*R.n();
-      const r2=r*r,cl=r2>=0.8?'2':r2>=0.4?'1':'4';
-      P.dots([[bx,by]],'f'+cl+' ring',i===0?6:4,{tip:()=>(i===0?'lead pQTL variant: ':'variant: ')+'protein '+bx.toFixed(2)+' SD, disease '+by.toFixed(3)+' log odds'+(shared?'':'; ratio '+(by/bx).toFixed(2))});
-      if(i===0&&shared)P.seg(0,0,0.42,th*0.42,'s4 dash')}
-    P.text(0.01,0.13,shared?'all variants give the same ratio':'ratios disagree between variants',{cls:'sm'})})};
+    P.hline(0);
+    const rAB=Math.exp(-(xB-xA)/L),leadY=shared?th*bA:gB*rAB;
+    P.seg(0,0,XM,leadY/bA*XM,'s4 dash');
+    const pos=[xA,xB];for(let k=0;k<5;k++)pos.push(xA+0.06*(R.u()-0.5));for(let k=0;k<4;k++)pos.push(xB+0.06*(R.u()-0.5));while(pos.length<28)pos.push(R.u());
+    pos.forEach((x,i)=>{const rA=Math.exp(-Math.abs(x-xA)/L),rB=Math.exp(-Math.abs(x-xB)/L),exact=i<2;
+      const bx=Math.min(XM-0.008,Math.max(0.006,bA*rA+(exact?0:0.005*R.n())));
+      const by=Math.min(YM-0.004,Math.max(-0.024,(shared?th*bA*rA:gB*rB)+(exact?0:0.0035*R.n())));
+      const r2=rA*rA,cl=r2>=0.8?'2':r2>=0.4?'1':'4',isB=!shared&&i===1;
+      const name=i===0?'lead pQTL variant':isB?'variant that causes the disease':'variant';
+      P.dots([[bx,by]],isB?'fb sk':'f'+cl+' ring',i===0?6.5:isB?5:4,{tip:()=>name+': protein '+bx.toFixed(2)+' SD, disease '+by.toFixed(3)+' log odds, ratio '+(by/bx).toFixed(2)+'; r² with lead '+r2.toFixed(2)});
+      if(isB)P.svg.lastChild.setAttribute('stroke-width','2')});
+    P.text(XM,-0.03,shared?'all variants give the same ratio':'ratios differ between variants',{anchor:'end',dx:-4,dy:-7,cls:'sm'})})};
 
 FIGS.phewas=function(host){const R=mkRng(61),cats=['Cardiovascular','Metabolic','Immune','Neurological','Respiratory','Other'],n=300,thr=-Math.log10(0.05/n);
   const P=Plot(host,{x:[0,n],y:[0,7],h:330,noX:true,ylab:'−log₁₀ P (Mendelian randomization)',legend:[['1','risk lower with the drug'],['2','risk higher with the drug']],legendSq:true});
@@ -3095,7 +3104,7 @@ FIGS.phewas=function(host){const R=mkRng(61),cats=['Cardiovascular','Metabolic',
 FIGS.funnel=function(host){const st=[['Genome-wide significant loci',250],['Fine-mapped to a small credible set',90],['Causal gene confidently assigned',45],['Direction and dose established',20],['Causal estimate survives colocalization',10],['Safe and tractable',4]];
   const w=660,h=300,wrap=H('div','plot',host),svg=S('svg',{viewBox:'0 0 '+w+' '+h,role:'img','aria-label':'Narrowing from loci to candidate targets'},wrap);
   const box=H('div',null,wrap);box.style.position='relative';
-  const max=st[0][1],x0=300,bw=w-x0-16,bh=h/st.length-9;
+  const max=st[0][1],x0=300,bw=w-x0-52,bh=h/st.length-9;
   st.forEach((r,i)=>{const y=i*(bh+9)+6,ww=Math.max(26,bw*Math.sqrt(r[1]/max));
     S('rect',{x:x0,y,width:ww,height:bh,rx:5,class:i===st.length-1?'f2':'f1','fill-opacity':0.35+0.1*i},svg);
     S('text',{x:x0-10,y:y+bh/2+4,'text-anchor':'end'},svg).textContent=r[0];
